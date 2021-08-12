@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<title>#{titleController.pageTitle}</title>
+</h:head>
+<h:body>
+
+    <style>
+ul {
+    list-style-type: none;
+    background-color: #F9E79F;
+}
+
+li a {
+    display: block;
+    color: #000;   /*  black */
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #7DCEA0;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #529f73;
+    color: white;
+}
+.navbar-custom { 
+            background-color: #7DCEA0; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #120d1a; 
+        }
+
+</style>
+
+<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">#{titleController.pageTitle} - Add Contact </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://localhost:8080/Assignment-war/faces/admin/index.xhtml">Admin Home</a></li>  
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomerContact.xhtml">All CustomerContact</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomer.xhtml">All Customer</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allIndustry.xhtml">All Industry</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allUsers.xhtml">Manage Users</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><h:form > <h:commandLink value="Logout" action="#{customerContactManagedBean.logout}" />  </h:form></li>
+    </ul>
+  </div>
+</nav>
+
+
+	<div class="container">
+		
+		<div>
+			<f:view>
+				<h:form>
+					<h1>
+						<h:outputText value="Create" />
+					</h1>
+					<table class="table table-bordered ">
+
+						<tr>
+							<td width="200"><h:outputLabel value="email"
+									for="email" /></td>
+									
+							<td><h:inputText id="email" value="#{customerContact.email}" title="email" required="true" requiredMessage="Please enter the email!" validatorMessage="email format is not right OR do not add spaces" pt:placeholder="xxx@gmail.com">
+		                       <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />    
+								</h:inputText>
+								<h:message for="email" class="#{!emial.valid ? 'label label-warning' : 'none'}" /> 
+									</td>
+
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="firstName" for="firstName"  />
+							</td>
+							<td><h:inputText id="firstName"
+									value="#{customerContact.firstName}" title="firstName" required="true" requiredMessage="Please enter the First Name!" pt:placeholder="XXX XX"/>
+									<h:message for="firstName" class="#{!firstName.valid ? 'label label-warning' : 'none'}" />
+									</td>
+								
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="lastName" for="lastName" /></td>
+							<td><h:inputText id="lastNaem" value="#{customerContact.lastName}"
+									title="lastName" required="true" requiredMessage="Please enter the last Name!" pt:placeholder="ccccc"/>
+									<h:message for="lastName" class="#{!lastName.valid ? 'label label-warning' : 'none'}" />
+									</td>
+									
+
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="gender" for="gender" /></td>
+							<td><h:inputText id="gender" value="#{customerContact.gender}"
+									title="gender" requiredMessage="Please enter the gender!" pt:placeholder="Male"/>
+									<h:message for="gender" class="#{!gender.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>
+						<tr>
+							<td><h:outputLabel value="phoneNumber" for="phoneNumber" /></td>
+							<td><h:inputText id="phoneNumber" value="#{customerContact.phoneNumber}"
+									title="phoneNumber" requiredMessage="Please enter the phoneNumber!" validatorMessage="Please enter a phoneNumber" converterMessage="Please enter a phoneNumber" pt:placeholder="0422854223"/>
+									<h:message for="phoneNumber" class="#{!phoneNumber.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>
+
+						 <tr>
+                        <td width ="150" valign="top">Customer Company Name:</td>
+
+                        <td valign="bottom">
+                            <h:outputLabel id = "Id" >#{customerContactManagedBean.getSpecificCustomerId()}</h:outputLabel>
+                        </td>
+                    </tr>
+
+					</table>
+
+					<h:commandButton id="submit" value="Submit"
+						action="#{addCustomerContact.addCustomerContactBySpecificCustomer(customerContact)}"
+						class="btn btn-primary" />
+						
+						
+					<h:link id="close" value="Close" outcome="/faces/admin/allCustomerContact.xhtml"
+						class="btn btn-primary" />
+
+				</h:form>
+
+			</f:view>
+		</div>
+	</div>
+
+</h:body>
+</html>

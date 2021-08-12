@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title>
+    </h:head>
+    <h:body>
+    <style>
+ul {
+    list-style-type: none;
+    background-color: #F9E79F;
+}
+
+li a {
+    display: block;
+    color: #000;   /*  black */
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #7DCEA0;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #529f73;
+    color: white;
+}
+.navbar-custom { 
+            background-color: #7DCEA0; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #120d1a; 
+        }
+
+</style>
+
+<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">#{titleController.pageTitle} - Edit Customer </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://localhost:8080/Assignment-war/faces/user/index.xhtml">User Home</a></li>  
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allCustomerContact.xhtml">All CustomerContact</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allCustomer.xhtml">All Customer</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allIndustry.xhtml">All Industry</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><h:form > <h:commandLink value="Logout" action="#{customerContactManagedBean.logout}" />  </h:form></li>
+    </ul>
+  </div>
+</nav>
+    
+
+    
+        <div class="container">
+
+            <h:form id="MyForm">
+                <table class="table table-bordered ">
+
+                    <tr>
+                        <td width ="150" valign="top">Id:</td>
+
+                        <td valign="bottom">
+                            <h:outputLabel id = "Id" >#{CustomerController.customer.customerId}</h:outputLabel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Scale: </td>
+                         the value below is for display
+                        <td valign="bottom">
+                            <h:inputText id = "scale" value="#{CustomerController.customer.scale}" binding="#{scale}" required="true"
+                                         validatorMessage="Please enter a scale."
+                                         requiredMessage="Please enter a sacle. ">
+                                         </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Name: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "name" value="#{CustomerController.customer.name}"  required="true"
+                                         validatorMessage="enter the company name "
+                                                 requiredMessage="Please enter number of company. ">
+                                                </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Purchased Product Name: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "purchasedProductName" value="#{CustomerController.customer.purchasedProductName}"  required="true"
+                                         validatorMessage="Please enter the Purchased Product Name"
+                                                 requiredMessage="Please enter a Purchased Product Name. ">
+                            </h:inputText>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Country: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "country" value="#{CustomerController.customer.country}"  required="true"
+                                         validatorMessage="Please enter a Country"
+                                                 requiredMessage="Please enter a Country. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+
+                  <tr>
+                        <td width ="100" valign="top">City: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "city" value="#{CustomerController.customer.city}"  required="true"
+                                         validatorMessage="Please enter a City"
+                                                 requiredMessage="Please enter a City. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                        <td width ="100" valign="top">Company Register Day: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id="registerDate" value="#{customerLocal.registerDate}"
+									title="registerDate" requiredMessage="Please enter the city!"  pt:placeholder="year-month-day">
+									<f:convertDateTime pattern = "yyyy-mm-dd" />
+									</h:inputText>
+									 <h:message for = "registerDate" style = "color:red" />
+                        </td>
+                    </tr>
+                    
+                    
+                    
+
+                    <tr>
+                        <td width ="100" valign="top">Street Address: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "streetAddress" value="#{CustomerController.customer.address.streetAddress}"  required="true"
+                                         validatorMessage="Please enter a Street Address"
+                                                 requiredMessage="Please enter a Street Address. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">Street Number: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "streetNumber" value="#{CustomerController.customer.address.streetNumber}"  required="true"
+                                         validatorMessage="Please enter a street number"
+                                                 requiredMessage="Please enter a street number. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <td width ="100" valign="top">Suburb: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "suburb" value="#{CustomerController.customer.address.suburb}"  required="true"
+                                         validatorMessage="Please enter a suburb"
+                                                 requiredMessage="Please enter a suburb. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">Postcode: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "postcode" value="#{CustomerController.customer.address.postcode}"  required="true"
+                                         validatorMessage="Please enter a postcode"
+                                                 requiredMessage="Please enter a postcode. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+                   
+                   
+                   <tr>
+                        <td width ="100" valign="top">State: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "state" value="#{CustomerController.customer.address.state}"  required="true"
+                                         validatorMessage="Please enter a state"
+                                                 requiredMessage="Please enter a state. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+
+
+                     <tr>
+							<td><h:outputLabel value="Industry:" for="industry" /></td>
+							<td><h:selectOneMenu id="industry"
+									value="#{customerContactManagedBean.selectIndustry}" >
+									<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+									<f:selectItems value="#{customerContactManagedBean.allIndustrys}"
+										var="c" itemLabel="#{c.typeName}" itemValue="#{c}" />
+								</h:selectOneMenu></td>
+				  </tr> 
+
+                </table>
+
+                <h:commandButton id="save" value="Save" action="#{customerContactManagedBean.editCustomer(CustomerController.customer)}"  class="btn btn-primary" >
+                    <f:param name="customerID" value="#{CustomerController.customerId+1}"/>
+                </h:commandButton>
+                <h:link id="close" value="Close" outcome="/faces/user/allCustomer.xhtml"
+						          class="btn btn-primary" />
+            </h:form>
+        </div>
+    </h:body>
+</html>

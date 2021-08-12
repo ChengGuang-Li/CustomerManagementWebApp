@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<title>#{titleController.pageTitle}</title>
+</h:head>
+<h:body>
+
+    <style>
+ul {
+    list-style-type: none;
+    background-color: #F9E79F;
+}
+
+li a {
+    display: block;
+    color: #000;   /*  black */
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #7DCEA0;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #529f73;
+    color: white;
+}
+.navbar-custom { 
+            background-color: #7DCEA0; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #120d1a; 
+        }
+
+</style>
+
+<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">#{titleController.pageTitle} - Add Customer </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://localhost:8080/Assignment-war/faces/admin/index.xhtml">Admin Home</a></li>  
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomerContact.xhtml">All CustomerContact</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomer.xhtml">All Customer</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allIndustry.xhtml">All Industry</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allUsers.xhtml">Manage Users</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+     <li><h:form > <h:commandLink value="Logout" action="#{customerContactManagedBean.logout}" />  </h:form></li>
+    </ul>
+  </div>
+</nav>
+
+
+	<div class="container">
+		
+		<div>
+			<f:view>
+				<h:form>
+					<h1>
+						<h:outputText value="Create" />
+					</h1>
+					<table class="table table-bordered ">
+
+						<tr>
+							<td width="200"><h:outputLabel value="name"
+									for="name" /></td>
+									
+						<td>
+							<h:inputText id="name" value="#{customerLocal.name}" title="name" required="true" requiredMessage="Please enter the name!"  pt:placeholder="AAA Company"/>
+		
+							<h:message for="name" class="#{!name.valid ? 'label label-warning' : 'none'}" /> 
+							</td>
+
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="scale" for="scale"  />
+							</td>
+							<td><h:inputText id="scale"
+									value="#{customerLocal.scale}" title="scale" required="true" requiredMessage="Please enter the scale!" pt:placeholder="Large"/>
+									<h:message for="scale" class="#{!scale.valid ? 'label label-warning' : 'none'}" />
+									</td>
+								
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="purchasedProductName" for="purchasedProductName" /></td>
+							<td><h:inputText id="purchasedProductName" value="#{customerLocal.purchasedProductName}"
+									title="purchasedProductName" required="true" requiredMessage="Please enter the last purchased Product Name!" pt:placeholder="Print Marchine"/>
+									<h:message for="purchasedProductName" class="#{!purchasedProductName.valid ? 'label label-warning' : 'none'}" />
+									</td>
+									
+
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="country" for="country" /></td>
+							<td><h:inputText id="country" value="#{customerLocal.country}"
+									title="country" requiredMessage="Please enter the country!" pt:placeholder="UA"/>
+									<h:message for="country" class="#{!country.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>
+						<tr>
+							<td><h:outputLabel value="city" for="city" /></td>
+							<td><h:inputText id="city" value="#{customerLocal.city}"
+									title="city" requiredMessage="Please enter the city!" validatorMessage="Please enter a city" converterMessage="Please enter a city" pt:placeholder="New York"/>
+									<h:message for="city" class="#{!city.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>
+						
+						
+						<tr>
+							<td><h:outputLabel value="company register day" for="registerDate" /></td>
+							
+							<td>  						
+							<h:inputText id="registerDate" value="#{customerLocal.registerDate}" 
+									title="registerDate" required="true" requiredMessage="Please enter the Register Day of Company!" pt:placeholder="year-month-day">
+									<f:convertDateTime pattern = "yyyy-mm-dd" />
+									</h:inputText>
+									
+									 <h:message for = "registerDate" style = "color:red" />
+									</td>
+
+						</tr>
+						
+						
+						
+
+                      <tr>
+							<td><h:outputLabel value="streetNumber" for="streetNumber" /></td>
+							<td><h:inputText id="streetNumber" value="#{customerLocal.streetNumber}"
+									title="streetNumber" requiredMessage="Please enter the streetNumber!"   pt:placeholder="12"/>
+									<h:message for="streetNumber" class="#{!streetNumber.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>
+
+                         <tr>
+							<td><h:outputLabel value="streetAddress" for="streetAddress" /></td>
+							<td><h:inputText id="streetAddress" value="#{customerLocal.streetAddress}"
+									title="streetAddress" requiredMessage="Please enter the streetAddress!"   pt:placeholder="akk"/>
+									<h:message for="streetAddress" class="#{!streetAddress.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>
+
+                       <tr>
+							<td><h:outputLabel value="suburb" for="suburb" /></td>
+							<td><h:inputText id="suburb" value="#{customerLocal.suburb}"
+									title="suburb" requiredMessage="Please enter the suburb!"  pt:placeholder="Town"/>
+									<h:message for="suburb" class="#{!suburb.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>
+
+                       <tr>
+							<td><h:outputLabel value="postcode" for="postcode" /></td>
+							<td><h:inputText id="postcode" value="#{customerLocal.postcode}"
+									title="postcode" requiredMessage="Please enter the postcode!"  pt:placeholder="2444"/>
+									<h:message for="postcode" class="#{!postcode.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr>  
+
+                        <tr>
+							<td><h:outputLabel value="state" for="state" /></td>
+							<td><h:inputText id="state" value="#{customerLocal.state}"
+									title="state" requiredMessage="Please enter the state!"  pt:placeholder=" New York State"/>
+									<h:message for="state" class="#{!state.valid ? 'label label-warning' : 'none'}" />
+									</td>
+
+						</tr> 
+
+
+
+						<tr>
+							<td width="100" valign="top">Industry:</td>
+							<td><h:selectOneMenu id="industry"
+									value="#{customerContactManagedBean.selectIndustry}"  >									
+									<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+									<f:selectItems value="#{customerContactManagedBean.allIndustrys}"
+										var="c" itemLabel="#{c.typeName}" itemValue="#{c}" >																			  
+									 </f:selectItems>
+										 
+								</h:selectOneMenu>
+								<h:message for="industry" class="#{!industry.valid ? 'label label-warning' : 'none'}" />
+								</td>
+						</tr>
+
+					</table>
+
+					<h:commandButton id="submit1" value="Submit"
+						action="#{addCustomer.addCustomer(customerLocal)}"
+						class="btn btn-primary" />
+					<h:link id="close" value="Close" outcome="/faces/admin/allCustomer.xhtml"
+						class="btn btn-primary" />
+
+				</h:form>
+
+			</f:view>
+		</div>
+	</div>
+
+</h:body>
+</html>

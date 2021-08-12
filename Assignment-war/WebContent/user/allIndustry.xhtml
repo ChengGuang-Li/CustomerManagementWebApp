@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title>
+    </h:head>
+    <h:body>
+    <style>
+ul {
+    list-style-type: none;
+    background-color: #F9E79F;
+}
+
+li a {
+    display: block;
+    color: #000;   /*  black */
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #7DCEA0;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #529f73;
+    color: white;
+}
+.navbar-custom { 
+            background-color: #7DCEA0; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #120d1a; 
+        }
+
+</style>
+	<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">#{titleController.pageTitle} - All Industry </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://localhost:8080/Assignment-war/faces/user/index.xhtml">User Home</a></li>  
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allCustomerContact.xhtml">All CustomerContact</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allCustomer.xhtml">All Customer</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allIndustry.xhtml">All Industry</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><h:form > <h:commandLink value="Logout" action="#{customerContactManagedBean.logout}" />  </h:form></li>
+    </ul>
+  </div>
+</nav>
+    
+    
+        <div class="container">
+           
+
+            <h:form id="MyForm">
+                <table class="table table-bordered table-striped">
+                    <!-- For each customerContact in customerContacts ArrayList... -->
+                    <tr>
+                            <td>
+                                <h:outputLabel id="Id" value="Id"  />
+                            </td>
+                            <td>
+                                <h:outputLabel id="IndustryName" value="Industry Name"  />
+                            </td>                          
+                            
+                            <td>
+                                <h:outputLabel id="operation" value="Operation"/>
+                            </td>
+                                             
+
+                     </tr>
+
+                    <ui:repeat id="Myrepeat" value="#{industryApplication.industrys}"  var="industry" varStatus="status">
+
+                        <tr onclick="document.getElementById('MyForm:principle').value = document.getElementById('MyForm:Myrepeat:#{status.index}:outTypeName').textContent;
+                            document.getElementById('MyForm:selectedId').value = document.getElementById('MyForm:Myrepeat:#{status.index}:industryID').textContent;">
+                            <td>
+                                <h:outputText value="#{industryApplication.industrys.get(status.index).id}" id="industryID" />
+
+                            </td>
+
+                            <td>
+                                <h:outputText id="outTypeName" value="#{industryApplication.industrys.get(status.index).typeName}"  />
+                            </td>
+          
+                            <td>
+                              <h:link value="View | " outcome="/faces/user/detailIndustry.xhtml">
+                              <!-- pass the parameter to next page, the param name is propertyID, and the value is index + 1.
+                                You can get the value from next page using the indexController -->
+                                <f:param name="industryID" value="#{status.index + 1}"/>
+                              </h:link>
+
+                              <h:link value="Edit | " outcome="/faces/user/editIndustry.xhtml">
+                              <!-- pass the parameter to next page, the param name is propertyID, and the value is index + 1.
+                                You can get the value from next page using the indexController -->
+                                <f:param name="industryID" value="#{status.index + 1}"/>
+                              </h:link>
+
+                                <h:commandLink value="Delete" action="#{removeIndustry.removeIndustrys(industryApplication.industrys.get(status.index).id)}" disabled="#{industryApplication.industrys.get(status.index).id == null}">
+                                </h:commandLink>
+
+                                <h:outputText value=" "/>
+                            </td>
+
+                        </tr>
+
+                    </ui:repeat>
+
+                </table>
+
+                <div>
+                    <h:commandButton id="add" value="Add" action="/faces/user/addIndustry.xhtml" class="btn btn-primary" style="float:left;margin-right:10px;"/>
+
+                    <h:commandButton id="viewAll" value="View All" action="#{searchIndustry.searchAll()}" class="btn btn-primary" >
+                        <f:param name="industryID" value="#{status.index + 1}"/>
+                    </h:commandButton>
+                </div>
+                <div>
+                    <h:inputText value="#{searchIndustry.searchByInt}" id="searchById" required="true" onchange ="if (document.getElementById('MyForm:searchById').value.trim() == '') {document.getElementById('MyForm:searchById').value = 0;} "   />
+                    <h:commandButton id="searchId" value="Search Industry by Id" action="#{searchIndustry.searchIndustryById(searchIndustry.searchByInt)}" class="btn btn-primary" >
+                        <f:param name="IndustryID" value="#{status.index + 1}"/>
+                    </h:commandButton>
+                </div>               
+
+
+            </h:form>
+        </div>
+    </h:body>
+</html>

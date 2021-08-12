@@ -1,0 +1,31 @@
+insert into Industry VALUES(1,'Bank');
+insert into Industry VALUES(2,'Building');
+insert into Industry VALUES(3,'Data Communication');
+insert into Industry VALUES(4,'Education');
+insert into Industry VALUES(5,'Farm');
+insert into Industry VALUES(6,'Health');
+insert into Industry VALUES(7,'Mining');
+insert into Industry VALUES(8,'Publishing');
+
+
+
+insert into Customer VALUES(1,'Cheng Du','CN','CCC','print Marchine','1993-06-25','Large','3168', 'Victoria', 'Bettina Street', '11', 'Clayton',1);
+insert into Customer VALUES(2,'Melbourne','AU','AAA','print Marchine','1999-05-25','Large','3163', 'Victoria', 'Wattle Avenue', '3', 'Glen Huntly',2);
+insert into Customer VALUES(3,'London','UK','BBB','print Marchine','2000-02-21','Large','3204', 'Victoria', 'Hamilton Street', '5', 'Bentleigh',3);
+insert into Customer VALUES(4,'New York','UA','VVV','print Marchine','1998-05-23','Large','3338', 'Victoria', 'Bettina Street', '11', 'Clayton',4);
+
+
+insert into Customer_Contact VALUES(1,'xxx@gmail.com','Sakura','Male','Murasame','04218888',1);
+insert into Customer_Contact VALUES(2,'eee@gmail.com','zeo','Female','Li','04218338',2);
+insert into Customer_Contact VALUES(3,'rrr@gmail.com','Cristiano','Male','Mu','04223888',3);
+insert into Customer_Contact VALUES(4,'ttt@gmail.com','Fernando','Male','Ke','042112288',4);
+insert into Customer_Contact VALUES(5,'zzz@gmail.com','Millicent','Female','Xu','042887958',4);
+
+
+insert into USERS (ID,username, password) values(1,'admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+
+insert into GROUPS (ID,username, groupname) values(1,'admin','admin');
+
+insert into USERS (ID,username, password) values(2,'user','04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb');
+
+insert into GROUPS (ID,username, groupname) values(2,'user','user');

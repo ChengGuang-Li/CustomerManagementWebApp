@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title>
+    </h:head>
+    <h:body>
+     <style>
+ul {
+    list-style-type: none;
+    background-color: #F9E79F;
+}
+
+li a {
+    display: block;
+    color: #000;   /*  black */
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #7DCEA0;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #529f73;
+    color: white;
+}
+.navbar-custom { 
+            background-color: #7DCEA0; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #120d1a; 
+        }
+
+</style>
+	<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">#{titleController.pageTitle} - Industry Info </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://localhost:8080/Assignment-war/faces/admin/index.xhtml">Admin Home</a></li>  
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomerContact.xhtml">All CustomerContact</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomer.xhtml">All Customer</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allIndustry.xhtml">All Industry</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allUsers.xhtml">Manage Users</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><h:form > <h:commandLink value="Logout" action="#{customerContactManagedBean.logout}" />  </h:form></li>
+    </ul>
+  </div>
+</nav>
+    
+
+        <div class="container">
+            
+
+            <h:form id="MyForm">
+                <table class="table table-bordered ">
+                    <tr>
+                        <td width ="150" valign="top">Id:</td>
+
+                        <td valign="bottom">
+                            <h:outputLabel id = "Id" >#{IndustryController.industry.id}</h:outputLabel>
+                        </td>
+                    </tr>
+                                       
+                    <tr>
+                        <td width ="100" valign="top">Industry Name: </td>
+
+                        <td valign="bottom">
+                            <h:outputLabel id = "TypeName" >#{IndustryController.industry.typeName}</h:outputLabel>
+                        </td>
+                    </tr>
+                                       
+
+                 </table>
+                 <h:link id="close" value="Close" outcome="/faces/admin/allIndustry.xhtml"
+ 						          class="btn btn-primary" />
+
+            </h:form>
+        </div>
+    </h:body>
+</html>

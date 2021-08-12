@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<title>#{titleController.pageTitle}</title>
+</h:head>
+<h:body>
+	<style>
+ul {
+	list-style-type: none;
+	background-color: #F9E79F;
+}
+
+li a {
+	display: block;
+	color: #000; /*  black */
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+li a.active {
+	background-color: #7DCEA0;
+	color: white;
+}
+
+li a:hover:not (.active ) {
+	background-color: #529f73;
+	color: white;
+}
+
+.navbar-custom {
+	background-color: #7DCEA0;
+}
+/* Modify brand and text color */
+.navbar-custom .navbar-brand, .navbar-custom .navbar-text {
+	color: #120d1a;
+}
+
+</style>
+	<nav class="navbar navbar-custom">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand">#{titleController.pageTitle} - Customer Includes Contacts
+			</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/index.xhtml">User
+					Home</a></li>
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/allCustomerContact.xhtml">All
+					CustomerContact</a></li>
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/allCustomer.xhtml">All
+					Customer</a></li>
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/allIndustry.xhtml">All
+					Industry</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><h:form>
+					<h:commandLink value="Logout"
+						action="#{customerContactManagedBean.logout}" />
+				</h:form></li>
+		</ul>
+	</div>
+	</nav>
+	
+	
+	<div class="container">
+
+
+		<h:form id="MyForm">
+			<table class="table table-bordered table-striped">
+				<!-- For each customerContact in customerContacts ArrayList... -->
+				<tr>
+
+					<td><h:outputLabel id="Contacts" value="Contact Id" /></td>
+                    
+                    <td><h:outputLabel id="FirstName" value="First Name" /></td>
+                    
+                    <td><h:outputLabel id="phoneNumber" value="Phone Number" /></td>
+
+					<td><h:outputLabel id="operation" value="Operation" /></td>
+
+
+				</tr>
+				<ui:repeat id="Myrepeat" value="#{CustomerController.customer.customerContact.toArray()}"
+					var="contact" varStatus="status">
+
+					<tr
+						onclick="document.getElementById('MyForm:principle').value = document.getElementById('MyForm:Myrepeat:#{status.index}:outContact').textContent;
+                            document.getElementById('MyForm:selectedId').value = document.getElementById('MyForm:Myrepeat:#{status.index}:customerID').textContent;">
+						<td>
+						
+						<h:outputText
+								value="#{CustomerController.customer.customerContact.toArray()[status.index].contactId}"
+								id="customerContactID" />
+						
+								
+						</td>
+						
+						<td><h:outputText id="outFirstName"
+								value="#{CustomerController.customer.customerContact.toArray()[status.index].firstName}" />
+						</td>
+						
+                        <td><h:outputText id="outPhoneNumber"
+								value="#{CustomerController.customer.customerContact.toArray()[status.index].phoneNumber}"></h:outputText>
+						</td>
+						
+
+						<td>
+						<h:link value="View " outcome="/faces/user/detailContactOfCustomer.xhtml">
+                              <!-- pass the parameter to next page, the param name is propertyID, and the value is index + 1.
+                                You can get the value from next page using the indexController -->
+                                <f:param name="customerContactID" value="#{status.index+1}"/>
+                              </h:link>
+													
+							</td>					
+
+					</tr>
+
+				</ui:repeat>
+
+			</table>
+         <h:link id="close" value="Close" outcome="/faces/user/allCustomer.xhtml" class="btn btn-primary"/>
+        
+     
+        <h:link id="add" value="Add New Customer Contact "
+					outcome="/faces/user/addNewContact.xhtml" class="btn btn-primary" style="float:left;margin-right:10px;">
+					 <f:param name="passCustomerId" value="#{CustomerController.customer.customerId}"/>
+					 
+			 </h:link>
+           
+		</h:form>
+	</div>
+
+
+</h:body>
+</html>

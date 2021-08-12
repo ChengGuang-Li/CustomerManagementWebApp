@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title>
+    </h:head>
+    <h:body>
+    <style>
+ul {
+    list-style-type: none;
+    background-color: #F9E79F;
+}
+
+li a {
+    display: block;
+    color: #000;   /*  black */
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #7DCEA0;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #529f73;
+    color: white;
+}
+.navbar-custom { 
+            background-color: #7DCEA0; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #120d1a; 
+        }
+
+</style>
+
+<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">#{titleController.pageTitle} - Edit Contact </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://localhost:8080/Assignment-war/faces/user/index.xhtml">User Home</a></li>  
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allCustomerContact.xhtml">All CustomerContact</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allCustomer.xhtml">All Customer</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/user/allIndustry.xhtml">All Industry</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><h:form > <h:commandLink value="Logout" action="#{customerContactManagedBean.logout}" />  </h:form></li>
+    </ul>
+  </div>
+</nav>
+    
+
+    
+        <div class="container">
+
+            <h:form id="MyForm">
+                <table class="table table-bordered ">
+
+                    <tr>
+                        <td width ="150" valign="top">Id:</td>
+
+                        <td valign="bottom">
+                            <h:outputLabel id = "Id" >#{CustomerContactController.customerContact.contactId}</h:outputLabel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Email: </td>
+                         
+                        <td valign="bottom">
+                            <h:inputText id = "email" value="#{CustomerContactController.customerContact.email}" binding="#{email}" required="true"
+                                         validatorMessage="Please enter a street number between 1 and 1000."
+                                         requiredMessage="Please enter an street number. ">
+                                         </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">First Name: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "firstName" value="#{CustomerContactController.customerContact.firstName}"  required="true"
+                                         validatorMessage="Number of rooms must be greater than 0"
+                                                 requiredMessage="Please enter number of rooms. ">
+                                                </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Last Name: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "lastName" value="#{CustomerContactController.customerContact.lastName}"  required="true"
+                                         validatorMessage="Please enter a value greater than 1.0"
+                                                 requiredMessage="Please enter a price. ">
+                            </h:inputText>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Gender: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "gender" value="#{CustomerContactController.customerContact.gender}"  required="true"
+                                         validatorMessage="Please enter a value greater than 1.0"
+                                                 requiredMessage="Please enter a size. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+
+                  <tr>
+                        <td width ="100" valign="top">Phone Number: </td>
+
+                        <td valign="bottom">
+                            <h:inputText id = "phoneNumber" value="#{CustomerContactController.customerContact.phoneNumber}"  required="true"
+                                         validatorMessage="Please enter a value greater than 1.0"
+                                                 requiredMessage="Please enter a size. ">
+                                                  </h:inputText>
+                        </td>
+                    </tr>
+
+
+                     <tr>
+							<td><h:outputLabel value="Customer:" for="customer" /></td>
+							<td><h:selectOneMenu id="customer"
+									value="#{customerContactManagedBean.selectName}" >
+									<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+									<f:selectItems value="#{customerContactManagedBean.allCustomers}"
+										var="c" itemLabel="#{c.name}" itemValue="#{c}" />
+								</h:selectOneMenu></td>
+				  </tr> 
+
+                </table>
+
+                <h:commandButton id="save" value="Save" action="#{customerContactManagedBean.editCustomerContact(CustomerContactController.customerContact)}"  class="btn btn-primary" >
+                    <f:param name="customerContactID" value="#{CustomerContactController.customerContactId+1}"/>
+                </h:commandButton>
+                <h:link id="close" value="Close" outcome="/faces/user/allCustomerContact.xhtml"
+						          class="btn btn-primary" />
+            </h:form>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	
+	<title>#{titleController.pageTitle}</title>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// use keyup event on password
+	var pass = document.getElementById("form:password");
+	$(pass).keyup(function(){
+		// check
+		//alert();	
+	 if(validatePassword()){
+			// set input password border green
+			//$("#pass").css("border","2px solid green");
+			//set passMsg 
+			 $("#passMsg").html("<h6>Password Valid</h6>");
+		}else{
+				// set input password border red
+			//$("#pass").css("border","2px solid red");
+			//set passMsg 
+			 $("#passMsg").html("<h6>Password Invalid!!Password contains at least numbers and English, length 4-10</h6>");
+		}
+		
+	});
+
+    var changePassword =  document.getElementById("form:changePassword");
+    $(changePassword).click(function(){
+
+    	if(validatePassword()){  
+
+    	}else{
+
+    		alert("Password is invalid!!!  Password contains at least numbers and English, length 4-10.  New password cannot be the same as old Password");
+      } 	
+	
+    });
+});
+
+function validatePassword(){
+	var pass = document.getElementById("form:password");
+	var passValue = $(pass).val();
+	// check it s length
+	 var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,10}$/
+	 if(reg.test(passValue)){
+		 	return true;
+	 }else{
+		 	return false;
+	 }
+}
+
+</script>
+</h:head>
+<h:body>
+	<style>
+ul {
+	list-style-type: none;
+	background-color: #F9E79F;
+}
+
+li a {
+	display: block;
+	color: #000; /*  black */
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+li a.active {
+	background-color: #7DCEA0;
+	color: white;
+}
+
+li
+
+ 
+
+a
+
+
+:hover
+
+
+:not
+
+ 
+
+(
+.active
+
+ 
+
+)
+{
+background-color
+:
+#529f73
+;
+color
+
+:
+white
+;
+}
+.navbar-custom {
+	background-color: #7DCEA0;
+}
+/* Modify brand and text color */
+.navbar-custom .navbar-brand, .navbar-custom .navbar-text {
+	color: #120d1a;
+}
+</style>
+
+	<nav class="navbar navbar-custom">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand">#{titleController.pageTitle} - User Area
+			</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/index.xhtml">User
+					Home</a></li>
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/allCustomerContact.xhtml">All
+					CustomerContact</a></li>
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/allCustomer.xhtml">All
+					Customer</a></li>
+			<li><a
+				href="http://localhost:8080/Assignment-war/faces/user/allIndustry.xhtml">All
+					Industry</a></li>			
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><h:form>
+					<h:commandLink value="Logout"
+						action="#{customerContactManagedBean.logout}" />
+				</h:form></li>
+		</ul>
+	</div>
+	</nav>
+
+	<h2>
+		<p>Welcom to User Area</p>
+	</h2>
+	<p></p>
+	<p></p>
+	<h:form id="form">
+		<table class="table table-hover">
+			<tr>
+				<td width="80" valign="top">Logged Username:</td>
+
+				<td ><h:outputLabel id="userName">#{customerContactManagedBean.userName}</h:outputLabel>
+				</td>
+			</tr>
+
+		</table>
+      <div class="row">   
+         <div  >
+             <div class="form-group" style="margin-left:2%" >
+				<h:outputLabel value="Change Password Input: "
+						 style="float:left;margin-right:15px;" />
+				 <h:inputSecret id="password" value = "#{customerContactManagedBean.password}" title="password" />										
+						<h:message for="password"
+						class="#{!password.valid ? 'label label-warning' : 'none'}" />
+				  <span id="passMsg"></span>
+			 </div> 	
+				
+				
+			 <div class="form-group" style="margin-left:2%">
+				<h:commandButton id="changePassword"
+						value="Change Password Confirm"
+						action="#{customerContactManagedBean.changePassword()}"
+						class="btn btn-primary">
+					</h:commandButton>			
+               </div>
+        </div>    
+ </div>
+		
+		<!--  Search CustomerContact according to customer's attribute  -->
+		<h4>
+			<p>Search Contact Person Information according to some attributes
+				of Customer</p>
+		</h4>
+		<table class="table table-hover">
+			<tr>
+				<td width="200" valign="top"><h:outputLabel value="Customer Company Scale " for="companyScale" /></td>
+				<td><h:inputText id="companyScale"
+						value="#{customerContactManagedBean.companyScale}" title="companyScale"
+						pt:placeholder="Search Input" /><h:message for="companyScale" class="#{!companyScale.valid ? 'label label-warning' : 'none'}" />	
+				  </td>
+
+			</tr>
+            
+            <tr>
+				<td width="200" valign="top"><h:outputLabel value="Customer Company Name " for="companyName" /></td>
+				<td width="200" valign="bottom"><h:inputText id="companyName"
+						value="#{customerContactManagedBean.companyName}" title="companyName"
+						pt:placeholder="Search Input" /><h:message for="companyName" class="#{!companyName.valid ? 'label label-warning' : 'none'}" />	
+				  </td>
+
+                <td> 
+                <h:commandButton id="searchResults" value="Combination Search Results"
+					action="#{customerContactManagedBean.searchCustomerContactByCustomerDetail()}"
+					class="btn btn-primary">
+					<f:param name="customerContactID" value="#{status.index + 1}" />
+				</h:commandButton>
+                         
+                
+                   </td> 
+			</tr>
+          
+		</table>
+		
+		
+
+		
+		<!--  Search CustomerContact according to customer's attribute  end-->
+	<h4>
+			<p>RESTful Web Service: GET customer detail according to customer Id</p>
+		</h4>
+	  <div style="margin-left:2%">   
+                <h:selectOneMenu id="customer"
+									value="#{customerContactManagedBean.selectName}"  >									
+									<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+									<f:selectItems value="#{customerContactManagedBean.allCustomers}"
+										var="c" itemLabel="#{c.name}" itemValue="#{c}" >																			  
+									 </f:selectItems>
+										 
+								</h:selectOneMenu>
+	
+	<h:commandLink value="View Customer Info"
+						action="#{customerContactManagedBean.jumpToRestFulUrl}" style="margin-left:20px;"/> 
+						
+		</div>				
+	</h:form>
+</h:body>
+</html>

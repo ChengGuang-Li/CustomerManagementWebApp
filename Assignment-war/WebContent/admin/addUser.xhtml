@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<title>#{titleController.pageTitle}</title>
+</h:head>
+<h:body>
+
+    <style>
+ul {
+    list-style-type: none;
+    background-color: #F9E79F;
+}
+
+li a {
+    display: block;
+    color: #000;   /*  black */
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #7DCEA0;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #529f73;
+    color: white;
+}
+.navbar-custom { 
+            background-color: #7DCEA0; 
+        } 
+        /* Modify brand and text color */ 
+          
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: #120d1a; 
+        }
+
+</style>
+
+<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">#{titleController.pageTitle} - Add User </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="http://localhost:8080/Assignment-war/faces/admin/index.xhtml">Admin Home</a></li>  
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomerContact.xhtml">All CustomerContact</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allCustomer.xhtml">All Customer</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allIndustry.xhtml">All Industry</a></li>
+      <li><a href="http://localhost:8080/Assignment-war/faces/admin/allUsers.xhtml">Manage Users</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+     <li><h:form > <h:commandLink value="Logout" action="#{customerContactManagedBean.logout}" />  </h:form></li>
+    </ul>
+  </div>
+</nav>
+
+
+	<div class="container">
+		
+		<div>
+			<f:view>
+				<h:form>
+					<h1>
+						<h:outputText value="Create" />
+					</h1>
+					<table class="table table-bordered ">
+
+						<tr>
+							<td width="200"><h:outputLabel value="Name"
+									for="name" /></td>
+									
+						<td>
+							<h:inputText id="name" value="#{user.username}" title="name" required="true" requiredMessage="Please enter the user name!"  pt:placeholder="input user name"/>
+		
+							<h:message for="name" class="#{!name.valid ? 'label label-warning' : 'none'}" /> 
+							</td>
+						<td width="200"><h:outputLabel value="Password"
+									for="Password" /></td>	
+							
+						<td>
+							<h:inputSecret id="passowrd" value="#{user.password}" title="password" required="true" requiredMessage="Please enter the Password!"  pt:placeholder="input password"/>
+		
+							<h:message for="password" class="#{!password.valid ? 'label label-warning' : 'none'}" /> 
+							</td>	
+
+						</tr>
+
+					</table>
+
+					<h:commandButton id="submit1" value="Submit"
+						action="#{addUser.addUser(user)}"
+						class="btn btn-primary" />
+					<h:link id="close" value="Close" outcome="/faces/admin/allUsers.xhtml"
+						class="btn btn-primary" />
+
+				</h:form>
+
+			</f:view>
+		</div>
+	</div>
+
+</h:body>
+</html>
